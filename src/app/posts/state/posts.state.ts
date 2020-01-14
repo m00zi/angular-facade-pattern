@@ -18,11 +18,11 @@ export class PostsState {
     }
 
     // Posts
-    getAllPosts$(): Observable<Post[]> {
+    getPosts$(): Observable<Post[]> {
         return this._posts$.asObservable();
     }
 
-    setAllPosts(posts: Post[]) {
+    setPosts(posts: Post[]) {
         this._posts$.next(posts);
     }
 }

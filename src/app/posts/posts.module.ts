@@ -14,7 +14,7 @@ import { PostsAPI } from './api/posts.api';
 
 // Components
 import { PostComponent } from './components/post/post.component';
-import { PostsListComponent } from './containers/posts-list/posts-list.component';
+import { PostsListComponent } from './components/posts-list/posts-list.component';
 
 
 @NgModule({

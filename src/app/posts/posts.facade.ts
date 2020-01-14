@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, tap } from 'rxjs/operators';
 
 import { PostsAPI } from './api/posts.api';
 import { PostsState } from './state/posts.state';
@@ -8,24 +8,17 @@ import Post from './models/post.model';
 
 @Injectable()
 export class PostsFacade {
-    private _posts$: Observable<Post[]>;
-    get posts$(): Observable<Post[]> {
-        return this._posts$;
-    }
-
-    private _updating$: Observable<boolean>;
-    set updating(isUpdating: boolean) {
-        this._updating$ = new Observable<boolean>();
-    }
-
     // Lifecycle
-    constructor(private _postsAPI: PostsAPI, private _postsState: PostsState) {
-        this._posts$ = this._postsAPI.getAllPosts().pipe(shareReplay(1));
-    }
+    constructor(private _postsAPI: PostsAPI, private _postsState: PostsState) { }
 
     // Methods
     isUpdating$(): Observable<boolean> {
-        return this._updating$;
+        return this._postsState.isUpdating$();
+    }
+
+    loadPosts$(): Observable<Post[]> {
+        return this._postsAPI.getAllPosts()
+            .pipe(tap(posts => this._postsState.setPosts(posts)));
     }
 
     getPostById(postId: number) {

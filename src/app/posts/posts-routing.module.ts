@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Components
-import { PostsListComponent } from './containers/posts-list/posts-list.component';
+import { PostsListComponent } from './components/posts-list/posts-list.component';
 import { PostComponent } from './components/post/post.component';
 
 const postsRoutes: Routes = [

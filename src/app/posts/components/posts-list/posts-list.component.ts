@@ -13,13 +13,12 @@ export class PostsListComponent implements OnInit {
   @Input() posts$: Post[];
   isUpdating$: Observable<boolean>;
 
+  // Lifecycle
   constructor(private _postsFacade: PostsFacade) {
     this.isUpdating$ = _postsFacade.isUpdating$();
   }
 
   ngOnInit() {
-    this._postsFacade.posts$.subscribe(posts => {
-      this.posts$ = posts;
-    });
+    this._postsFacade.loadPosts$().subscribe(posts => this.posts$ = posts);
   }
 }
