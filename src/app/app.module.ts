@@ -6,8 +6,7 @@ import { AppComponent } from './app.component';
 
 // Custom modules
 import { HomeModule } from './home/home.module';
-import { CarsModule } from './cars/cars.module';
-
+import { PostsModule } from './posts/posts.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,7 @@ import { CarsModule } from './cars/cars.module';
 
     // Custom modules
     HomeModule,
-    CarsModule
+    PostsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
