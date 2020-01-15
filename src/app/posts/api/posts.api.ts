@@ -16,4 +16,8 @@ export class PostsAPI {
     getAllPosts(): Observable<Post[]> {
         return this._network.get<Post[]>(this.API_URL, this.POSTS);
     }
+
+    getPostById(postId: number): Observable<Post> {
+        return this._network.get<Post>(this.API_URL, this.POSTS + '/' + postId);
+    }
 }
