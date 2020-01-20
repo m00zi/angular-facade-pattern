@@ -126,6 +126,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-facade-pattern"
+    }
+  },
+  "defaultProject": "angular-facade-pattern",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }
