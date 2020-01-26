@@ -24,4 +24,8 @@ export class PostsFacade {
     getPostById(postId: number) {
 
     }
+
+    createPost(post: Post) {
+
+    }
 }
