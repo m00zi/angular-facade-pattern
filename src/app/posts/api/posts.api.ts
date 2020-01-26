@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NetworkService } from '../../lib/network.service';
 
-import Post from '../models/post.model';
+import { Post } from '../state/post.model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PostsAPI {
     readonly API_URL = 'https://jsonplaceholder.typicode.com';
     readonly POSTS = '/posts';
@@ -19,5 +19,9 @@ export class PostsAPI {
 
     getPostById(postId: number): Observable<Post> {
         return this._network.get<Post>(this.API_URL, this.POSTS + '/' + postId);
+    }
+
+    createPost(post: Post) {
+        return this._network.post<Post>(this.API_URL, this.POSTS, post);
     }
 }

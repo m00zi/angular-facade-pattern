@@ -1,8 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-
+import { Component, OnInit } from '@angular/core';
+import { Post } from '../../state/post.model';
 import { PostsFacade } from '../../posts.facade';
-import Post from '../../models/post.model';
 
 @Component({
   selector: 'app-posts-list',
@@ -10,15 +8,22 @@ import Post from '../../models/post.model';
   styleUrls: ['./posts-list.component.scss']
 })
 export class PostsListComponent implements OnInit {
-  @Input() posts$: Post[];
-  isUpdating$: Observable<boolean>;
+  posts$ = this.postsFacade.postsQuery.selectAll();
 
-  // Lifecycle
-  constructor(private _postsFacade: PostsFacade) {
-    this.isUpdating$ = _postsFacade.isUpdating$();
+  constructor(private postsFacade: PostsFacade) { }
+
+  ngOnInit() { }
+
+  addPost() {
+    const post: Post = {
+      userId: 1,
+      title: 'Hi there!',
+      body: 'Testing a new post here.'
+    };
+    this.postsFacade.addPost(post);
   }
 
-  ngOnInit() {
-    this._postsFacade.loadPosts$().subscribe(posts => this.posts$ = posts);
+  removePost(post: Post) {
+    this.postsFacade.removePost(post);
   }
 }

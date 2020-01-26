@@ -9,7 +9,6 @@ import { PostsRoutingModule } from './posts-routing.module';
 // Providers
 import { NetworkService } from '../lib/network.service';
 import { PostsFacade } from './posts.facade';
-import { PostsState } from './state/posts.state';
 import { PostsAPI } from './api/posts.api';
 
 // Components
@@ -31,7 +30,6 @@ import { PostsListComponent } from './components/posts-list/posts-list.component
   providers: [
     NetworkService,
     PostsFacade,
-    PostsState,
     PostsAPI
   ]
 })

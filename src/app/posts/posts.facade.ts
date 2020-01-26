@@ -1,31 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { shareReplay, tap } from 'rxjs/operators';
+import { PostsService } from './state/posts.service';
+import { Post } from './state/post.model';
+import { PostsQuery } from './state/posts.query';
 
-import { PostsAPI } from './api/posts.api';
-import { PostsState } from './state/posts.state';
-import Post from './models/post.model';
-
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PostsFacade {
-    // Lifecycle
-    constructor(private _postsAPI: PostsAPI, private _postsState: PostsState) { }
+    posts$ = this.postsQuery.selectAll();
 
-    // Methods
-    isUpdating$(): Observable<boolean> {
-        return this._postsState.isUpdating$();
+    constructor(public postsQuery: PostsQuery,
+                private postsService: PostsService) {
+        this.postsService.get().subscribe(_ => console.log('Success'));
     }
 
-    loadPosts$(): Observable<Post[]> {
-        return this._postsAPI.getAllPosts()
-            .pipe(tap(posts => this._postsState.setPosts(posts)));
+    addPost(post: Post) {
+        this.postsService.add(post);
     }
 
-    getPostById(postId: number) {
-
-    }
-
-    createPost(post: Post) {
-
+    removePost(post: Post) {
+        this.postsService.remove(post.id);
     }
 }
