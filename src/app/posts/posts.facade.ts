@@ -7,7 +7,7 @@ import { PostsQuery } from './state/posts.query';
 export class PostsFacade {
     posts$ = this.postsQuery.selectAll();
 
-    constructor(public postsQuery: PostsQuery,
+    constructor(private postsQuery: PostsQuery,
                 private postsService: PostsService) {
         this.postsService.get().subscribe(_ => console.log('Success'));
     }

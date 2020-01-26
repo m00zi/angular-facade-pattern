@@ -8,7 +8,7 @@ import { PostsFacade } from '../../posts.facade';
   styleUrls: ['./posts-list.component.scss']
 })
 export class PostsListComponent implements OnInit {
-  posts$ = this.postsFacade.postsQuery.selectAll();
+  posts$ = this.postsFacade.posts$;
 
   constructor(private postsFacade: PostsFacade) { }
 

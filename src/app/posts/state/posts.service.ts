@@ -19,7 +19,7 @@ export class PostsService {
     this.postsAPI.createPost(post).subscribe(response => {
       if (response.id) {
         post.id = response.id;
-        this.postsStore.add(post);
+        this.postsStore.add(post, { prepend: true });
       }
     });
   }
